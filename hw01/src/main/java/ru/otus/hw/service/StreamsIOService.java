@@ -1,13 +1,17 @@
 package ru.otus.hw.service;
 
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class StreamsIOService implements IOService {
     private final PrintStream printStream;
 
-    public StreamsIOService(PrintStream printStream) {
+    private final Scanner input;
 
+    public StreamsIOService(PrintStream printStream, InputStream inputStream) {
         this.printStream = printStream;
+        this.input = new Scanner(inputStream);
     }
 
     @Override
@@ -18,5 +22,10 @@ public class StreamsIOService implements IOService {
     @Override
     public void printFormattedLine(String s, Object... args) {
         printStream.printf(s + "%n", args);
+    }
+
+    @Override
+    public int readInt() {
+        return input.nextInt();
     }
 }
