@@ -40,13 +40,6 @@ public class TestCommandProcessorImpl implements TestCommandProcessor {
     public void processQuestion(Question question) {
         showQuestionText(question, ioService);
         printAnswers(question.answers(), ioService);
-        var userAnswer = processUserAnswer(ioService);
-        try {
-            processResult(question.answers().get(userAnswer - 1).isCorrect(), ioService);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IncorrectAnswerException("Answer do not exist");
-        }
-
     }
 
     @Override
@@ -65,6 +58,7 @@ public class TestCommandProcessorImpl implements TestCommandProcessor {
         answers.forEach(withCounter((i, answer) -> {
             ioService.printFormattedLine("%d. %s", ++i, answer.text());
         }));
+        ioService.printLine("");
     }
 
     @Override
