@@ -18,7 +18,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public String processUserAnswer(IOService ioService) {
-        return ioService.readString();
+        return ioService.readStringWithPrompt("Choose your answer: ");
     }
 
     @Override
