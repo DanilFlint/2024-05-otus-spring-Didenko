@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class Utils {
+public class AnswerUtils {
 
     public static <T> Consumer<T> withCounter(BiConsumer<Integer, T> consumer) {
         AtomicInteger counter = new AtomicInteger(0);

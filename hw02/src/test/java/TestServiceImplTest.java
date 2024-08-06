@@ -3,10 +3,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.otus.hw.config.TestFileNameProvider;
-import ru.otus.hw.dao.CsvQuestionDao;
+import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.domain.Student;
+import ru.otus.hw.domain.TestResult;
+import ru.otus.hw.service.IOService;
+import ru.otus.hw.service.TestServiceImpl;
+import ru.otus.hw.service.answers.AnswerService;
+import ru.otus.hw.service.questions.QuestionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +20,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CsvQuestionDAOTest {
+public class TestServiceImplTest {
 
     @Mock
-    private TestFileNameProvider fileNameProvider;
+    private IOService ioService;
+
+    @Mock
+    private QuestionDao questionDao;
+
+    @Mock
+    private AnswerService answerService;
+
+    @Mock
+    private QuestionService questionService;
 
     @InjectMocks
-    private CsvQuestionDao csvQuestionDao;
+    private TestServiceImpl testService;
 
     @Test
-    public void shouldCorrectReadFile() {
-        when(fileNameProvider.getTestFileName()).thenReturn("questions2.csv");
+    public void shouldCorrectExecuteTest() {
+        Student student = new Student("Danil", "Didenko");
 
-        assertEquals(getExpectedListQuestions(), csvQuestionDao.findAll());
+        when(questionDao.findAll()).thenReturn(getExpectedListQuestions());
+        when(answerService.processAnswer(getExpectedListQuestions().get(0))).thenReturn(true);
+        when(answerService.processAnswer(getExpectedListQuestions().get(1))).thenReturn(true);
+
+        TestResult testResult = new TestResult(student);
+        testResult.setRightAnswersCount(2);
+
+        assertEquals(
+                testResult.getRightAnswersCount(),
+                testService.executeTestFor(student).getRightAnswersCount()
+        );
     }
 
     private List<Question> getExpectedListQuestions() {
