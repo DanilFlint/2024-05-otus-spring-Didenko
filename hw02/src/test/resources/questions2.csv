@@ -1,0 +1,3 @@
+# Добавить сюда своих вопросов. Эту строку надо пропустить при настройке CsvToBean (withSkipLines)
+Which animal does not appear in the Chinese zodiac?;Dragon%false|Rabbit%false|Dog%false|Hummingbird%true
+Which planet is the hottest?;Venus%true|Mercury%false|Saturn%false|Mars%false
