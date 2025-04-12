@@ -1,4 +1,4 @@
-package ru.otus.hw.repositories;
+package ru.otus.hw.repositories.jdbc;
 
 import lombok.Getter;
 import org.springframework.dao.DataAccessException;
@@ -12,6 +12,7 @@ import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
+import ru.otus.hw.repositories.BookRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -12,6 +12,8 @@ import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
+import ru.otus.hw.repositories.jdbc.JdbcBookRepository;
+import ru.otus.hw.repositories.jdbc.JdbcGenreRepository;
 
 import java.util.List;
 import java.util.stream.IntStream;
