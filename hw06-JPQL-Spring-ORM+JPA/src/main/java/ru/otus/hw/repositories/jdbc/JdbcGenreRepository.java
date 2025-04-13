@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Getter
-@Repository
+//@Repository
 public class JdbcGenreRepository implements GenreRepository {
 
     private NamedParameterJdbcOperations namedParameterJdbcOperations;

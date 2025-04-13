@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Getter
-@Repository
+//@Repository
 public class JdbcBookRepository implements BookRepository {
 
     private NamedParameterJdbcOperations namedParameterJdbcOperations;

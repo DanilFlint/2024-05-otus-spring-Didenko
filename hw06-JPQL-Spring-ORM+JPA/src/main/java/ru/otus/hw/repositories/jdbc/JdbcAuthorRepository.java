@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Getter
-@Repository
+//@Repository
 public class JdbcAuthorRepository implements AuthorRepository {
 
     private NamedParameterJdbcOperations namedParameterJdbcOperations;
