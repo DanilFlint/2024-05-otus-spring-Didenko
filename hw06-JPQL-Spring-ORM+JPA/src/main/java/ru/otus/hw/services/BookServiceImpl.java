@@ -1,5 +1,6 @@
 package ru.otus.hw.services;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.hw.exceptions.EntityNotFoundException;
@@ -20,26 +21,31 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    @Transactional
     @Override
     public Optional<Book> findById(long id) {
         return bookRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Book insert(String title, long authorId, long genreId) {
         return save(0, title, authorId, genreId);
     }
 
+    @Transactional
     @Override
     public Book update(long id, String title, long authorId, long genreId) {
         return save(id, title, authorId, genreId);
     }
 
+    @Transactional
     @Override
     public void deleteById(long id) {
         bookRepository.deleteById(id);
