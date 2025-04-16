@@ -7,7 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
@@ -21,11 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Репозиторий на основе Jdbc для работы с книгами ")
 @DataJpaTest
-@Import(JpaBookRepository.class)
 class JpaBookRepositoryTest {
 
     @Autowired
-    private JpaBookRepository repositoryJpa;
+    private BookRepository repositoryJpa;
 
     private List<Author> dbAuthors;
 
@@ -96,14 +96,6 @@ class JpaBookRepositoryTest {
                 .isEqualTo(returnedBook);
 
         assertThat(repositoryJpa.findById(4L).isEmpty());
-    }
-
-    @DisplayName("должен выбрасывать EntityNotFoundException если не обновлено ни одной записи в БД")
-    @Test
-    void shouldThrowEntityNotFoundException() {
-        var expectedBook = new Book(111L, "BookTitle_10500", dbAuthors.get(2), dbGenres.get(2));
-
-        assertThrows(EntityNotFoundException.class, () -> repositoryJpa.save(expectedBook));
     }
 
     @DisplayName("должен удалять книгу по id ")
